@@ -6,7 +6,7 @@ model = joblib.load("anurag_model.pkl")
 encoder=joblib.load("anurag_encoder.pkl")
 @app.route('/')
 def home ():
-    return render_template('index.html')# write here html page
+    return render_template('home.html')# write here html page
 @app.route('/predict',methods = ['POST'])
 def predict():
     try:
