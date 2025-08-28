@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CrediSure</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(rgba(228, 9, 9, 0.4), rgba(65, 33, 182, 0.898)),
+        url('https://images.unsplash.com/photo-1588776814546-18f530aa06fc') center/cover no-repeat;
+      min-height: 100vh;
+      color: #fff;
+      animation: fadeInBackground 3s ease-in-out;
+    }
+
+    @keyframes fadeInBackground {
+      0% {
+        background-position: top;
+        opacity: 0;
+      }
+      100% {
+        background-position: center;
+        opacity: 1;
+      }
+    }
+
+    nav {
+      background-color: rgba(51, 115, 134, 0.9);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: slideDown 1s ease-out;
+    }
+
+    nav h1 {
+      color: white;
+      font-size: 2rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul li {
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+      text-decoration: none;
+    }
+
+    nav ul li:hover {
+      color: #ffde59;
+      transform: scale(1.1);
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    form {
+      max-width: 700px;
+      margin: 4rem auto;
+      padding: 2.5rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+      animation: fadeInForm 1.8s ease;
+    }
+
+    @keyframes fadeInForm {
+      0% {
+        transform: translateY(80px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    label {
+      display: block;
+      margin: 1rem 0 0.4rem;
+      font-weight: 600;
+      animation: labelPulse 2s infinite ease-in-out alternate;
+    }
+
+    @keyframes labelPulse {
+      0% {
+        opacity: 0.8;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 12px;
+      border: none;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      transition: 0.3s;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      box-shadow: 0 0 10px #00ffff;
+      transform: scale(1.02);
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1.1rem;
+      background-color: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0, 188, 212, 0.4);
+    }
+
+    button:hover {
+      background-color: #0097a7;
+      transform: scale(1.05);
+    }
+
+    h4 {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 1.8rem;
+      color: #fff;
+      animation: scaleFadeIn 1.5s ease forwards;
+    }
+
+    @keyframes scaleFadeIn {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
+      form {
+        margin: 2rem;
+      }
+      
+    }
+    #Loan{
+      display: inline-block;
+      padding: 7px, 10px;
+      background-color: purple;
+      display: block;
+
+    }
+    
+
+    
+    .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: rgb(0, 183, 255);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 500px;
+    margin-top: 10px;
+  }
+  .btn:hover {
+    background: darkblue;
+  }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <h1>CrediSure</h1>
+    <ul> 
+      <a href="https://web.umang.gov.in/landing/department/cibil.html"><li>Check CIBIL</li></a>
+      <a href="home.html">HOME</a>
+
+      <li>About</li>
+      <li>Profile</li>
+    </ul>
+  </nav>
+
+  <form action="/predict" method="POST">
+    <label for="Gender">Select Your Gender</label>
+    <select name="Gender" id="Gender">
+      <option value="None">Select The Option</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Prefer Not To Say">Prefer Not To Say</option>
+    </select>
+
+    <label for="Married">Married</label>
+    <select name="Married" id="Married">
+      <option value="None">Select The Option</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+
+    <label for="Dependents">Dependents</label>
+    <select name="Dependents" id="Dependents">
+      <option value="None">Select The Option</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="No Dependents">No Dependents</option>
+    </select>
+
+    <label for="Education">Education</label>
+    <select name="Education" id="Education">
+      <option value="None">Select The Option</option>
+      <option value="Graduate">Graduate</option>
+      <option value="Not Graduate">Not Graduate</option>
+    </select>
+
+    <label for="Self_Employed">Self Employed</label>
+    <select name="Self_Employed" id="Self_Employed">
+      <option value="None">Select The Option</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+
+  
+    <label for="ApplicantIncome">Applicant Income [Per Annum]</label>
+    <input type="text" name="ApplicantIncome" id="ApplicantIncome" placeholder="Enter Your Income" required />
+
+    
+
+    <label for="CoapplicantIncome ">Coapplicant Income [Per Annum]</label>
+    <input type="text" name="CoapplicantIncome" id="CoapplicantIncome" placeholder="Enter Your Coapplicant Income" required />
+
+    <label for="LoanAmount">Loan Amount</label>
+    <input type="text" name="LoanAmount" id="LoanAmount"placeholder="Enter Your Loan Amount" required />
+
+    <label for="Loan_Amount_Term">Loan Amount Term</label>
+    <input type="text" name="Loan_Amount_Term" id="Loan_Amount_Term" placeholder="Enter Your Loan Duration (In Months)" required />
+
+    <label for="Property_Area">Property Area</label>
+    <select name="Property_Area" id="Property_Area">
+      <option value="None">Select The Option</option>
+      <option value="Urban">Urban</option>
+      <option value="Rural">Rural</option>
+      <option value="Semiurban">Semiurban</option>
+    </select>
+
+    <button type="submit">Check Eligibility</button>
+  </form>
+
+  {% if prediction_text %}
+  <h4 id="result">{{ prediction_text }}</h4>
+  {% endif %}
+  <div id="Loan">
+     <h4>Want To Know How much Loan You are eligible</h4>
+    </div>
+  
+  <div id="check">
+  <a href="check.html" class="btn">Click Here</a>
+</div>
+  
+  
+
+</body>
+</html>

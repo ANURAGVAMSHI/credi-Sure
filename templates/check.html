@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Eligibility Checker</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+  
+  <div class="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-lg">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">
+      Loan Eligibility Checker
+    </h1>
+
+    <form id="loanForm" class="space-y-5">
+      
+      <!-- Applicant Income -->
+      <div>
+        <label class="block text-gray-700 font-semibold mb-2">Applicant Income</label>
+        <input id="applicantIncome" type="number" placeholder="Enter your income [Per Month]"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
+      </div>
+      
+      <!-- Coapplicant Income -->
+      <div>
+        <label class="block text-gray-700 font-semibold mb-2">Coapplicant Income</label>
+        <input id="coApplicantIncome" type="number" placeholder="Enter coapplicant income [Per Month]"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
+      </div>
+      
+      <!-- CIBIL Score -->
+      <div>
+        <label class="block text-gray-700 font-semibold mb-2">CIBIL Score</label>
+        <input id="cibilScore" type="number" placeholder="Enter your CIBIL score"
+          class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-400 focus:outline-none">
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button type="submit"
+          class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300">
+          Check Eligibility
+        </button>
+      </div>
+    </form>
+
+    <!-- Result Block -->
+    <div id="resultBlock" class="mt-6 hidden p-5 bg-green-100 rounded-lg shadow-inner text-center">
+      <h4 class="text-xl font-bold text-green-700">Eligible Loan Amount</h4>
+      <p id="loanAmountText" class="text-2xl font-semibold text-gray-800 mt-2"></p>
+    </div>
+  </div>
+
+<script>
+  function loanEligibility(applicantSalary, coApplicantSalary, cibil, annualRate = 10, tenureYears = 20) {
+    let totalIncome = applicantSalary + coApplicantSalary;
+
+    // Step 1: Check EMI eligibility based on CIBIL
+    let emiEligibility = 0;
+    if (cibil < 650) {
+        emiEligibility = 0;  // Not eligible
+    } else if (cibil < 700) {
+        emiEligibility = totalIncome * 0.30;
+    } else if (cibil < 750) {
+        emiEligibility = totalIncome * 0.40;
+    } else {
+        emiEligibility = totalIncome * 0.50;
+    }
+
+    // Step 2: Loan calculation
+    let r = (annualRate / 100) / 12;  // monthly interest rate
+    let n = tenureYears * 12;        // tenure in months
+
+    let numerator = emiEligibility * ((Math.pow(1 + r, n) - 1));
+    let denominator = r * Math.pow(1 + r, n);
+    let loanAmount = numerator / denominator;
+
+    return Math.round(loanAmount);
+  }
+
+  // Handle form submit
+  document.getElementById("loanForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // prevent reload
+
+    let applicantIncome = parseInt(document.getElementById("applicantIncome").value) || 0;
+    let coApplicantIncome = parseInt(document.getElementById("coApplicantIncome").value) || 0;
+    let cibilScore = parseInt(document.getElementById("cibilScore").value) || 0;
+
+    let loan = loanEligibility(applicantIncome, coApplicantIncome, cibilScore);
+
+    let resultBlock = document.getElementById("resultBlock");
+    let loanAmountText = document.getElementById("loanAmountText");
+
+    if (loan > 0) {
+      loanAmountText.textContent = "₹ " + loan.toLocaleString();
+      resultBlock.classList.remove("hidden");
+    } else {
+      loanAmountText.textContent = "Not Eligible for Loan";
+      resultBlock.classList.remove("hidden");
+    }
+
+    console.log("Eligible Loan Amount:", loan);
+  });
+</script>
+
+</body>
+</html>
