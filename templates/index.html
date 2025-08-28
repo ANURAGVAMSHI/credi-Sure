@@ -209,6 +209,48 @@
   .btn:hover {
     background: darkblue;
   }
+  .container {
+  text-align: center;
+}
+
+.cool-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(45deg, #ff6ec4, #7873f5);
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.cool-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.cool-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.3);
+  transform: skewX(-25deg);
+}
+
+.cool-btn:hover::after {
+  left: 120%;
+  transition: left 0.7s ease;
+}
   </style>
 </head>
 <body>
@@ -217,10 +259,10 @@
     <h1>CrediSure</h1>
     <ul> 
       <a href="https://web.umang.gov.in/landing/department/cibil.html"><li>Check CIBIL</li></a>
-      <a href="home.html">HOME</a>
+       <a href="{{ url_for('home') }}">HOME</a>
 
-      <li>About</li>
-      <li>Profile</li>
+      <a href="about.html">ABOUT</a>
+      <a href="profile">PROFILE</a>
     </ul>
   </nav>
 
@@ -298,9 +340,12 @@
      <h4>Want To Know How much Loan You are eligible</h4>
     </div>
   
-  <div id="check">
-  <a href="check.html" class="btn">Click Here</a>
-</div>
+ 
+<div class="container">
+    
+    
+    <a href="{{ url_for('check') }}" class="cool-btn">Click Here</a>
+  </div>
   
   
 

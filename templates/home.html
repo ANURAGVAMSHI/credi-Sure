@@ -3,70 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    body{
-        background-image: url('https://happay.com/blog/wp-content/uploads/sites/12/2022/09/baas-banking-as-a-service-.png'); 
-        background-repeat: repeat;
-        background-size: 100px, 100px;
-        background-position: absolute;
-        background-attachment: fixed;
-
-
-    }
-    h1 {
-         font-size: 100px;
-         text-align: center;
-         margin-top: 200px;
-         color: rgb(94, 197, 220);
-        margin-left: 300px;
-        background-color: rgb(4, 4, 10);
-        border-radius: 10px;
-        width: 50%;
-        font-weight: bolder;
-
+    <title>CrediSure</title>
+    <style>
+        body {
+            background-image: url('https://happay.com/blog/wp-content/uploads/sites/12/2022/09/baas-banking-as-a-service-.png'); 
+            background-repeat: repeat;
+            background-size: 100px, 100px;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
         }
-    
-    button{
-        font-size: 20px;
-        padding: 15px 15px;
-        text-align: center;
-        margin-left: 400px;
-        margin-bottom: 300px;
-        background-color: rgb(13, 6, 6);
-        border-radius: 10px;
-        font-family: Georgia, 'Times New Roman', Times, serif;
 
-        
-    }
-   
-    .Anurag{
-        text-decoration: none;
-    }
-    
-    
+        h1 {
+            font-size: 8vw; /* responsive font size */
+            color: rgb(94, 197, 220);
+            background-color: rgba(4, 4, 10, 0.85);
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-weight: bolder;
+            max-width: 90%;
+        }
 
-    
-</style>
+        /* Cool animated button */
+        .cool-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            margin-top: 30px;
+            font-size: 4vw; /* responsive font size */
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(45deg, #ff6ec4, #7873f5);
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .cool-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .cool-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.3);
+            transform: skewX(-25deg);
+        }
+
+        .cool-btn:hover::after {
+            left: 120%;
+            transition: left 0.7s ease;
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 10vw;
+            }
+            .cool-btn {
+                font-size: 5vw;
+                padding: 12px 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 12vw;
+            }
+            .cool-btn {
+                font-size: 6vw;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
 <body>
-    <div id="container"><h1>CrediSure</h1>
-    </div>
-   
-    
-    
-    <div>
-    <a href="index.html"> <Button>Click here to Check your Eligibility</Button></a>
-    </div>
-    
-
-    
-
-    
-
-
-       
-
-    
+    <h1>CrediSure</h1>
+    <a href="{{ url_for('index') }}" class="cool-btn">Check Eligibility</a>
 </body>
 </html>
